@@ -291,7 +291,11 @@ body {
   white-space: nowrap;
 }
 
-.table.is-all .col-rank,
+.col-global {
+  width: 72px;
+}
+
+.table.is-all .col-global,
 .table:not(.is-all) .col-category {
   display: none;
 }
@@ -544,6 +548,11 @@ body {
   margin-bottom: 14px;
 }
 
+.meta-sub {
+  color: var(--muted);
+  font-size: 0.8125rem;
+}
+
 .item-name {
   margin: 0;
   font-size: clamp(1.5rem, 3.5vw, 2rem);
@@ -676,6 +685,10 @@ body {
   }
 
   .col-rank {
+    width: 52px;
+  }
+
+  .col-global {
     width: 52px;
   }
 

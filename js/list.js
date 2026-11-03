@@ -3,15 +3,16 @@ import { formatPrice, isPodium, itemUrl, loadWishlist, priceValue } from "./wish
 
 const ALL_CATEGORIES = "all";
 const DEFAULT_SORT = "rank";
+// The "all" view ranks items across categories; a category view only ranks within itself.
+const rankOf = (item, isAll) => (isAll ? item.globalRank : item.rank);
 const SORT_ORDERS = {
-  rank: (a, b) => a.rank - b.rank,
-  price: (a, b) => Math.sign(priceValue(a) - priceValue(b)) || 0,
+  rank: (isAll) => (a, b) => rankOf(a, isAll) - rankOf(b, isAll),
+  price: (isAll) => (a, b) => Math.sign(priceValue(a) - priceValue(b)) || rankOf(a, isAll) - rankOf(b, isAll),
 };
 
 const titleElement = document.getElementById("title");
 const intro = document.getElementById("intro");
 const chipGroup = document.getElementById("categories");
-const sortGroup = document.getElementById("sort");
 const sortButtons = [...document.querySelectorAll("[data-sort]")];
 const categoryNote = document.getElementById("category-note");
 const tableCard = document.getElementById("table-card");
@@ -59,18 +60,16 @@ function start({ title, intro: introText, categories }) {
   const render = () => {
     const isAll = state.category === ALL_CATEGORIES;
     const category = categories.find(({ name }) => name === state.category);
-    // Ranks only exist inside a category, so the "all" view has a single fixed order.
-    const visible = isAll ? allItems.toSorted(SORT_ORDERS.price) : category.items.toSorted(SORT_ORDERS[state.sort]);
+    const visible = (isAll ? allItems : category.items).toSorted(SORT_ORDERS[state.sort](isAll));
 
     for (const chip of chips) chip.setAttribute("aria-pressed", String(chip.dataset.category === state.category));
     for (const button of sortButtons) button.setAttribute("aria-pressed", String(button.dataset.sort === state.sort));
-    sortGroup.hidden = isAll;
     table.classList.toggle("is-all", isAll);
 
     categoryNote.hidden = !category?.note;
     if (category?.note) categoryNote.replaceChildren(...richText(category.note));
 
-    rows.replaceChildren(...visible.map(renderRow));
+    rows.replaceChildren(...visible.map((item, index) => renderRow(item, index, isAll)));
     tableCard.hidden = visible.length === 0;
     if (visible.length === 0) showMessage(status, "Rien dans cette catégorie pour l'instant.");
     else status.hidden = true;
@@ -81,7 +80,8 @@ function start({ title, intro: introText, categories }) {
   render();
 }
 
-function renderRow(item, index) {
+function renderRow(item, index, isAll) {
+  const rank = rankOf(item, isAll);
   const link = h("a", { href: itemUrl(item), class: "row-link" }, item.name);
   return h(
     "tr",
@@ -92,7 +92,8 @@ function renderRow(item, index) {
         if (!event.target.closest("a")) link.click();
       },
     },
-    h("td", { class: "col-rank" }, h("span", { class: isPodium(item) ? "rank rank-podium" : "rank" }, item.rank)),
+    h("td", { class: "col-rank" }, h("span", { class: isPodium(rank) ? "rank rank-podium" : "rank" }, rank)),
+    h("td", { class: "col-global" }, h("span", { class: isPodium(item.globalRank) ? "rank rank-podium" : "rank" }, item.globalRank)),
     h(
       "td",
       { class: "col-name" },
@@ -107,7 +108,7 @@ function renderRow(item, index) {
 function saveStateInUrl(state, isAll) {
   const params = new URLSearchParams();
   if (!isAll) params.set("category", state.category);
-  if (!isAll && state.sort !== DEFAULT_SORT) params.set("sort", state.sort);
+  if (state.sort !== DEFAULT_SORT) params.set("sort", state.sort);
   const query = params.toString();
   history.replaceState(null, "", query ? `?${query}` : location.pathname);
 }

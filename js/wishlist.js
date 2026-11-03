@@ -13,7 +13,7 @@ export async function loadWishlist() {
   return {
     title: isText(wishlist.title) ? wishlist.title : DEFAULT_TITLE,
     intro: optionalText(wishlist.intro, (reason) => fail(`"intro" ${reason}`)),
-    categories: parseCategories(wishlist.categories, photos),
+    categories: parseCategories(wishlist.categories, photos, wishlist.ranking),
   };
 }
 
@@ -30,8 +30,8 @@ export function itemUrl(item) {
   return `item.html?id=${encodeURIComponent(item.id)}`;
 }
 
-export function isPodium(item) {
-  return item.rank <= PODIUM_SIZE;
+export function isPodium(rank) {
+  return rank <= PODIUM_SIZE;
 }
 
 async function request(path) {
@@ -51,12 +51,12 @@ async function readJson(response, path) {
   }
 }
 
-function parseCategories(rawCategories, photos) {
+function parseCategories(rawCategories, photos, rawRanking) {
   if (!Array.isArray(rawCategories)) fail(`"categories" doit être une liste.`);
 
   const names = new Set();
   const ids = new Set();
-  return rawCategories.map((raw, index) => {
+  const categories = rawCategories.map((raw, index) => {
     const failCategory = (reason) => fail(`catégorie n°${index + 1} : ${reason}`);
     if (!isText(raw.name)) failCategory(`le champ "name" est obligatoire.`);
     if (names.has(raw.name)) failCategory(`la catégorie "${raw.name}" existe déjà.`);
@@ -71,6 +71,26 @@ function parseCategories(rawCategories, photos) {
       ),
     };
   });
+
+  applyGlobalRanking(categories, rawRanking, ids);
+  return categories;
+}
+
+// "ranking" lists every item id from best to worst; it must cover all items exactly once.
+function applyGlobalRanking(categories, rawRanking, ids) {
+  if (!Array.isArray(rawRanking)) fail(`"ranking" doit être une liste d'id, du préféré au moins préféré.`);
+
+  const globalRanks = new Map();
+  for (const id of rawRanking) {
+    if (!ids.has(id)) fail(`"ranking" : l'id "${id}" ne correspond à aucun cadeau.`);
+    if (globalRanks.has(id)) fail(`"ranking" : l'id "${id}" apparaît plusieurs fois.`);
+    globalRanks.set(id, globalRanks.size + 1);
+  }
+
+  const missing = [...ids].filter((id) => !globalRanks.has(id));
+  if (missing.length > 0) fail(`"ranking" : il manque ${missing.map((id) => `"${id}"`).join(", ")}.`);
+
+  for (const item of categories.flatMap((category) => category.items)) item.globalRank = globalRanks.get(item.id);
 }
 
 function parseItem(raw, { category, rank, ids, photos }) {
@@ -90,6 +110,7 @@ function parseItem(raw, { category, rank, ids, photos }) {
   return {
     id: raw.id,
     rank,
+    globalRank: 0, // filled in once the whole ranking has been read
     category,
     name: raw.name,
     price: raw.price ?? null,
