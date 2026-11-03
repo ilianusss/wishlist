@@ -25,7 +25,9 @@ jobs:
       - name: Keep only the files the site serves
         run: |
           mkdir _site
-          cp -r index.html item.html assets css data js _site/
+          cp -r index.html item.html css data js _site/
+          # git does not track empty folders, so assets/ is absent until a photo is committed
+          if [ -d assets ]; then cp -r assets _site/; fi
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
