@@ -97,7 +97,6 @@ function renderRow(item, index) {
       "td",
       { class: "col-name" },
       link,
-      item.warning && h("span", { class: "flag", title: item.warning }, "Important"),
       h("span", { class: "cell-sub" }, item.category),
     ),
     h("td", { class: "col-price" }, formatPrice(item.price)),
