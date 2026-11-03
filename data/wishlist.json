@@ -6,6 +6,7 @@
     "sauteuse-inox",
     "poele-acier",
     "couteau-japonais",
+    "couteau-office-japonais",
     "chateaux-de-bourgogne",
     "dawn-of-pangaea",
     "pantalon-marron",
@@ -52,7 +53,7 @@
           "price": 139,
           "link": "https://atmakitchenware.fr/products/la-sauteuse-ideale-en-inox-manche-bronze-26-cm",
           "note": "Sauteuse en inox 26 cm ATMA (manche bronze si possible)",
-          "warning": "ATTENTION A COMMANDER LE 9 NOVEMBRE"
+          "warning": "ATTENTION A COMMANDER AVANT LE 9 NOVEMBRE"
         },
         {
           "id": "poele-acier",
@@ -64,20 +65,27 @@
         {
           "id": "couteau-japonais",
           "name": "Couteau Japonais",
-          "price": 80,
-          "warning": "Pas encore fait le benchmarking, le lien arrivera après"
+          "price": 65,
+          "link": "https://www.couteaujaponais.com/couteau-japonais-kanetsune-hammered-santoku-165-cm-c2x26934168"
+        },
+        {
+          "id": "couteau-office-japonais",
+          "name": "Couteau d’office Japonais",
+          "price": 17,
+          "link": "https://couteauxduchef.com/products/couteau-legumes-kai-lame-9cm-etui-protecteur-cerisier-p6405?_pos=1&_sid=4b803ed68&_ss=r&_fid=df1aa3a3e"
         },
         {
           "id": "rice-cooker",
           "name": "Rice cooker",
-          "price": 35,
-          "warning": "Pas encore fait le benchmarking, le lien arrivera après"
+          "price": 50,
+          "link": "https://www.amazon.fr/dp/B00V8ZQKGO?m=A1X6FK5RDHNB96&tag=idealocom-21"
         },
         {
           "id": "planche-a-decouper",
           "name": "Planche à découper",
-          "price": 60,
-          "warning": "Pas encore fait le benchmarking, le lien arrivera après"
+          "price": 65,
+          "link": "https://www.zwilling.com/fr/zwilling-accessoires-60-cm-x-40-cm-planche-a-decouper-nature-35118-100-0/35118-100-0.html?cgid=cutlery_cutting-boards",
+          "note": "Une planche à découper en bois de hêtre, chêne ou noyer. Epaisseur 3 à 4 cm. Si possible 60x40 ou dans ces eaux là. Je mets un exemple mais une planche avec es caractéristiques est très bien."
         },
         {
           "id": "pierre-a-pizza",
@@ -172,7 +180,8 @@
           "id": "pantalon-marron",
           "name": "Pantalon marron foncé",
           "price": 50,
-          "note": "Pantalon large ou barrel"
+          "note": "Pantalon large ou barrel marron foncé de chez Uniqlo",
+          "link": "https://www.uniqlo.com/fr/fr/"
         },
         {
           "id": "pull",
