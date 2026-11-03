@@ -1,0 +1,201 @@
+{
+  "title": "Ma wishlist",
+  "intro": "Dans chaque catégorie, c’est par ordre de préférence, mais n’importe quoi me fait super plaisir (si quelque chose ne me plaisait pas, elle ne serait juste PAS sur la liste) donc faites le choix vous-même.\nEn plus il y a pour tout budget (pour chaque catégorie)",
+  "categories": [
+    {
+      "name": "Autre",
+      "items": [
+        {
+          "id": "argent",
+          "name": "Argent",
+          "price": "∞"
+        }
+      ]
+    },
+    {
+      "name": "Maison",
+      "items": []
+    },
+    {
+      "name": "Cuisine",
+      "items": [
+        {
+          "id": "sauteuse-inox",
+          "name": "Sauteuse en inox",
+          "price": 139,
+          "link": "https://atmakitchenware.fr/products/la-sauteuse-ideale-en-inox-manche-bronze-26-cm",
+          "note": "Sauteuse en inox 26 cm ATMA (manche bronze si possible)",
+          "warning": "ATTENTION A COMMANDER LE 9 NOVEMBRE"
+        },
+        {
+          "id": "poele-acier",
+          "name": "Poele en acier",
+          "price": 73,
+          "link": "https://www.debuyer.com/fr/poele-en-acier-mineral-b-4335.html",
+          "note": "Poele en acier 28 cm DE BUYER"
+        },
+        {
+          "id": "couteau-japonais",
+          "name": "Couteau Japonais",
+          "price": 80,
+          "warning": "Pas encore fait le benchmarking, le lien arrivera après"
+        },
+        {
+          "id": "rice-cooker",
+          "name": "Rice cooker",
+          "price": 35,
+          "warning": "Pas encore fait le benchmarking, le lien arrivera après"
+        },
+        {
+          "id": "planche-a-decouper",
+          "name": "Planche à découper",
+          "price": 60,
+          "warning": "Pas encore fait le benchmarking, le lien arrivera après"
+        },
+        {
+          "id": "pierre-a-pizza",
+          "name": "Pierre réfractaire à Pizza",
+          "price": 28,
+          "link": "https://www.amazon.fr/-/en/Pizza-Divertimento-pizza-stone-grill/dp/B08FDVZPFB",
+          "note": "Pierre en cordiérite, rectangulaire, 15mm épaisseur minimum. On en trouve partout c’est un bout de caillou donc pas la peine d’une marque en particulier mais je mets un exemple."
+        },
+        {
+          "id": "pelle-a-pizza",
+          "name": "Pelle à pizza",
+          "price": 25,
+          "link": "https://www.amazon.fr/-/en/Pizza-Divertimento-pizza-stone-grill/dp/B08FDWRDZ8",
+          "note": "Comme la pierre, c’est juste une pelle, je ne veux pas celle là précisément"
+        },
+        {
+          "id": "culs-de-poule",
+          "name": "Culs de poule / bol",
+          "price": 5,
+          "link": "https://www.ikea.com/fr/fr/p/blanda-blank-saladier-acier-inoxydable-20057255/",
+          "note": "On en a jamais trop. Entre 12 et 28cm tout me va."
+        }
+      ]
+    },
+    {
+      "name": "Jeux de société",
+      "note": "Les sites sont [Play-in](https://www.play-in.com/fr/) et [Philibert](https://www.philibertnet.com/fr/). Si c’est sur Play-in, il y a le click&collect de dispo et Juliette peut aller le chercher pour vous.",
+      "items": [
+        {
+          "id": "chateaux-de-bourgogne",
+          "name": "Chateau de bourgogne - édition spéciale",
+          "price": 144,
+          "link": "https://www.play-in.com/fr/produit/505474/les-chateaux-de-bourgogne-edition-speciale",
+          "note": "Grand classique du jeu de gestion : chaque joueur développe son domaine dans la Bourgogne du XVe siècle en posant des tuiles (châteaux, mines, élevages, commerce) choisies avec ses dés. Cette édition est ré-illustrée et contient 11 mini-extensions, dont des modes solo et en équipe. 1 à 4 joueurs."
+        },
+        {
+          "id": "dawn-of-pangaea",
+          "name": "Dawn of Pangea",
+          "price": 75,
+          "link": "https://www.philibertnet.com/fr/treecer/183885-the-dawn-of-pangaea-deluxe-edition-724133308603.html",
+          "note": "Sur le supercontinent préhistorique, les joueurs sont des esprits de la Terre qui font pousser des forêts, accomplissent des rituels et éveillent les premières créatures. Le plateau modulaire et la météo changent à chaque partie, et le premier à atteindre le sommet de la montagne sacrée gagne. 1 à 4 joueurs, avec un mode solo et coopératif."
+        },
+        {
+          "id": "jaipur",
+          "name": "Jaipur",
+          "price": 18.5,
+          "link": "https://www.play-in.com/fr/produit/256678/jaipur",
+          "note": "Jeu de cartes à deux : chacun est un marchand de Jaipur qui échange et revend épices, tissus, pierres précieuses et chameaux pour devenir le marchand attitré du Maharaja. Rapide (environ 30 min), tendu et très malin."
+        },
+        {
+          "id": "lost-cities-duel",
+          "name": "Lost cities",
+          "price": 15.5,
+          "link": "https://www.play-in.com/fr/produit/647597/lost-cities-duel",
+          "note": "Jeu de cartes à deux de Reiner Knizia : chacun lance des expéditions vers des cités perdues en posant ses cartes dans l’ordre croissant. Partir en expédition coûte des points, tout l’enjeu est de savoir quand se lancer et quoi défausser sans aider l’adversaire."
+        },
+        {
+          "id": "carnuta",
+          "name": "Carnuta",
+          "price": 18.5,
+          "link": "https://www.play-in.com/fr/produit/626758/carnuta",
+          "note": "Jeu familial de 2 à 4 joueurs (environ 25 min) : des druides préparent la meilleure potion pour la grande cérémonie. À chaque tour on choisit deux actions (piocher, poser une carte, prendre ou retourner des runes soleil et lune) pour assembler les ingrédients qui rapportent le plus de points."
+        },
+        {
+          "id": "sea-salt-paper",
+          "name": "Sea, salt and paper",
+          "price": 11.9,
+          "link": "https://www.play-in.com/fr/produit/442627/sea-salt-paper",
+          "note": "Petit jeu de cartes de 2 à 4 joueurs illustré en origami, sur le thème de la mer. On collectionne des cartes, on pose des paires pour déclencher des effets, et dès qu’on atteint 7 points on peut arrêter la manche ou parier qu’on fera mieux que les autres."
+        },
+        {
+          "id": "dobble",
+          "name": "Dobble",
+          "price": 10.9,
+          "link": "https://www.play-in.com/fr/produit/245210/dobble-format-blister",
+          "note": "Le classique d’observation et de rapidité : entre deux cartes il y a toujours exactement un symbole en commun, et il faut être le premier à le repérer et à le nommer. Plusieurs mini-jeux, des parties de quelques minutes, dès 2 joueurs."
+        },
+        {
+          "id": "fliptoons",
+          "name": "Fliptoons",
+          "price": 18.5,
+          "link": "https://www.play-in.com/fr/produit/662710/fliptoons",
+          "note": "Deckbuilding rapide (environ 20 min, 1 à 4 joueurs) : en agent artistique, on recrute des personnages de dessin animé. À chaque manche on retourne ses cartes en grille de 3 par 2, leur placement rapporte de la renommée, et le premier à 30 points déclenche la fin."
+        }
+      ]
+    },
+    {
+      "name": "Vêtements",
+      "note": "C’est plus simple de donner de l’argent et je vous enverrai ce que j’ai pris, sinon demandez à Juliette",
+      "items": [
+        {
+          "id": "chaussettes-blanches",
+          "name": "Chaussettes montantes blanches",
+          "price": 3.9,
+          "link": "https://www.uniqlo.com/fr/fr/",
+          "note": "Chaussettes montantes blanches Uniqlo (43/46)"
+        },
+        {
+          "id": "pantalon-marron",
+          "name": "Pantalon marron foncé",
+          "price": 50,
+          "note": "Pantalon large ou barrel"
+        },
+        {
+          "id": "pull",
+          "name": "Pull",
+          "price": 80,
+          "note": "Un pull (je dois choisir le modèle)"
+        },
+        {
+          "id": "t-shirt",
+          "name": "T-Shirt",
+          "price": 35,
+          "note": "On a jamais trop de T-shirts. **SURTOUT PAS DE CARHARRT UNI PITIE**"
+        }
+      ]
+    },
+    {
+      "name": "Lecture",
+      "items": [
+        {
+          "id": "histoire-mythologie-grecque",
+          "name": "L’ incroyable histoire de la mythologie grecque",
+          "price": 26,
+          "link": "https://www.fnac.com/a17441589/Philippe-Bercovici-L-Incroyable-histoire-de-la-mythologie-grecque"
+        },
+        {
+          "id": "histoire-mythologie-nordique",
+          "name": "L’ incroyable histoire de la mythologie nordique",
+          "price": 25,
+          "link": "https://www.fnac.com/a20666816/Catherine-Mory-L-Incroyable-Histoire-de-la-mythologie-viking"
+        },
+        {
+          "id": "histoire-cuisine",
+          "name": "L’ incroyable histoire de la cuisine",
+          "price": 26,
+          "link": "https://www.fnac.com/a16092523/Benoist-Simmat-L-Incroyable-histoire-de-la-cuisine-De-la-prehistoire-a-nos-jours-500-000-ans-d-aventure"
+        },
+        {
+          "id": "histoire-animaux",
+          "name": "L’ incroyable histoire des animaux",
+          "price": 22,
+          "link": "https://www.fnac.com/a13934048/Karine-Lou-Matignon-L-Incroyable-histoire-des-animaux"
+        }
+      ]
+    }
+  ]
+}

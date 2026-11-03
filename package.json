@@ -1,0 +1,9 @@
+{
+  "name": "wishlist",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node scripts/dev.mjs",
+    "photos": "node scripts/photos.mjs"
+  }
+}

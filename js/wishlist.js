@@ -1,0 +1,119 @@
+const WISHLIST_PATH = "data/wishlist.json";
+const PHOTOS_PATH = "data/photos.json";
+const PHOTOS_DIR = "assets/items";
+const DEFAULT_TITLE = "Wishlist";
+const PODIUM_SIZE = 3;
+const ID_PATTERN = /^[a-z0-9]+(-[a-z0-9]+)*$/;
+const priceFormat = new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR" });
+
+export async function loadWishlist() {
+  const [wishlistResponse, photosResponse] = await Promise.all([request(WISHLIST_PATH), request(PHOTOS_PATH)]);
+  const wishlist = await readJson(wishlistResponse, WISHLIST_PATH);
+  const photos = photosResponse.status === 404 ? {} : await readJson(photosResponse, PHOTOS_PATH);
+  return {
+    title: isText(wishlist.title) ? wishlist.title : DEFAULT_TITLE,
+    intro: optionalText(wishlist.intro, (reason) => fail(`"intro" ${reason}`)),
+    categories: parseCategories(wishlist.categories, photos),
+  };
+}
+
+export function formatPrice(price) {
+  if (price === null) return "N/C";
+  return typeof price === "number" ? priceFormat.format(price) : price;
+}
+
+export function priceValue(item) {
+  return typeof item.price === "number" ? item.price : Infinity;
+}
+
+export function itemUrl(item) {
+  return `item.html?id=${encodeURIComponent(item.id)}`;
+}
+
+export function isPodium(item) {
+  return item.rank <= PODIUM_SIZE;
+}
+
+async function request(path) {
+  try {
+    return await fetch(path, { cache: "no-cache" });
+  } catch {
+    throw new Error(`Impossible de charger ${path}. Lance "npm run dev" et ouvre l'adresse affichée.`);
+  }
+}
+
+async function readJson(response, path) {
+  if (!response.ok) throw new Error(`Impossible de charger ${path} (HTTP ${response.status}).`);
+  try {
+    return await response.json();
+  } catch (error) {
+    throw new Error(`${path} n'est pas un JSON valide : ${error.message}`);
+  }
+}
+
+function parseCategories(rawCategories, photos) {
+  if (!Array.isArray(rawCategories)) fail(`"categories" doit être une liste.`);
+
+  const names = new Set();
+  const ids = new Set();
+  return rawCategories.map((raw, index) => {
+    const failCategory = (reason) => fail(`catégorie n°${index + 1} : ${reason}`);
+    if (!isText(raw.name)) failCategory(`le champ "name" est obligatoire.`);
+    if (names.has(raw.name)) failCategory(`la catégorie "${raw.name}" existe déjà.`);
+    names.add(raw.name);
+    if (!Array.isArray(raw.items)) failCategory(`"items" doit être une liste (vide si besoin).`);
+
+    return {
+      name: raw.name,
+      note: optionalText(raw.note, (reason) => failCategory(`"note" ${reason}`)),
+      items: raw.items.map((item, itemIndex) =>
+        parseItem(item, { category: raw.name, rank: itemIndex + 1, ids, photos }),
+      ),
+    };
+  });
+}
+
+function parseItem(raw, { category, rank, ids, photos }) {
+  const failItem = (reason) => fail(`${category}, cadeau n°${rank} : ${reason}`);
+
+  for (const field of ["id", "name"]) {
+    if (!isText(raw[field])) failItem(`le champ "${field}" est obligatoire.`);
+  }
+  if (!ID_PATTERN.test(raw.id)) failItem(`l'id "${raw.id}" ne doit contenir que des minuscules, chiffres et tirets.`);
+  if (ids.has(raw.id)) failItem(`l'id "${raw.id}" est déjà utilisé.`);
+  ids.add(raw.id);
+  if (raw.price != null && !Number.isFinite(raw.price) && !isText(raw.price)) {
+    failItem(`"price" doit être un nombre (ex : 49.99) ou un texte (ex : "∞").`);
+  }
+  if (raw.link != null && !isWebUrl(raw.link)) failItem(`"link" doit être une adresse http(s).`);
+
+  return {
+    id: raw.id,
+    rank,
+    category,
+    name: raw.name,
+    price: raw.price ?? null,
+    link: raw.link ?? null,
+    note: optionalText(raw.note, (reason) => failItem(`"note" ${reason}`)),
+    warning: optionalText(raw.warning, (reason) => failItem(`"warning" ${reason}`)),
+    photos: (photos[raw.id] ?? []).map((file) => `${PHOTOS_DIR}/${raw.id}/${encodeURIComponent(file)}`),
+  };
+}
+
+function optionalText(value, onInvalid) {
+  if (value == null || value === "") return null;
+  if (typeof value !== "string") onInvalid("doit être du texte.");
+  return value;
+}
+
+function isText(value) {
+  return typeof value === "string" && value.trim() !== "";
+}
+
+function isWebUrl(value) {
+  return URL.canParse(value) && ["http:", "https:"].includes(new URL(value).protocol);
+}
+
+function fail(reason) {
+  throw new Error(`${WISHLIST_PATH}, ${reason}`);
+}

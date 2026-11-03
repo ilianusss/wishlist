@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Wishlist</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <script type="module" src="js/list.js"></script>
+  </head>
+  <body>
+    <main class="page">
+      <header class="page-header">
+        <h1 id="title">Wishlist</h1>
+        <p id="intro" class="intro rich" hidden></p>
+      </header>
+
+      <div class="toolbar">
+        <div id="categories" class="chips" role="group" aria-label="Filtrer par catégorie"></div>
+        <div id="sort" class="sort" hidden>
+          <span id="sort-label" class="sort-label">Tri par</span>
+          <div class="segmented" role="group" aria-labelledby="sort-label">
+            <button type="button" data-sort="rank">Rang</button>
+            <button type="button" data-sort="price">Prix croissant</button>
+          </div>
+        </div>
+      </div>
+
+      <p id="category-note" class="card category-note rich" hidden></p>
+
+      <div id="table-card" class="card table-card" hidden>
+        <table id="table" class="table">
+          <thead>
+            <tr>
+              <th scope="col" class="col-rank">Rang</th>
+              <th scope="col">Cadeau</th>
+              <th scope="col" class="col-price">Prix</th>
+              <th scope="col" class="col-category">Catégorie</th>
+            </tr>
+          </thead>
+          <tbody id="rows"></tbody>
+        </table>
+      </div>
+
+      <p id="status" class="status" role="status" hidden></p>
+    </main>
+  </body>
+</html>
