@@ -438,6 +438,16 @@ body {
   object-fit: contain;
 }
 
+.gallery-zoom {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: zoom-in;
+}
+
 .gallery-nav {
   position: absolute;
   top: 50%;
@@ -714,5 +724,145 @@ body {
     animation-duration: 1ms !important;
     animation-delay: 0ms !important;
     transition-duration: 1ms !important;
+  }
+}
+
+.viewer-open {
+  overflow: hidden;
+}
+
+.viewer {
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: rgb(8 8 7 / 0.97);
+  color: #fff;
+  overflow: hidden;
+}
+
+.viewer[open] {
+  animation: viewer-in 220ms var(--ease) both;
+}
+
+.viewer::backdrop {
+  background: transparent;
+}
+
+.viewer-stage {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 56px 16px;
+  touch-action: pan-y;
+}
+
+.viewer-image {
+  max-width: 100%;
+  max-height: calc(100vh - 112px);
+  max-height: calc(100dvh - 112px);
+  object-fit: contain;
+  border-radius: 6px;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.viewer-close,
+.viewer-nav {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: rgb(255 255 255 / 0.14);
+  color: #fff;
+  line-height: 1;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  transition:
+    background 180ms var(--ease),
+    transform 120ms var(--ease);
+}
+
+.viewer-close:hover,
+.viewer-nav:hover {
+  background: rgb(255 255 255 / 0.26);
+}
+
+.viewer-close:active,
+.viewer-nav:active {
+  transform: scale(0.92);
+}
+
+.viewer-close {
+  top: 12px;
+  right: 12px;
+  width: 42px;
+  height: 42px;
+  padding-bottom: 3px;
+  font-size: 1.9rem;
+}
+
+.viewer-nav {
+  top: 50%;
+  translate: 0 -50%;
+  width: 48px;
+  height: 48px;
+  padding-bottom: 4px;
+  font-size: 2rem;
+}
+
+.viewer-prev {
+  left: 16px;
+}
+
+.viewer-next {
+  right: 16px;
+}
+
+.viewer-counter {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  translate: -50% 0;
+  padding: 2px 12px;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.14);
+  font-size: 0.8rem;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 600px) {
+  .viewer-stage {
+    padding: 64px 0;
+  }
+
+  .viewer-image {
+    max-height: calc(100dvh - 128px);
+    border-radius: 0;
+  }
+
+  .viewer-nav {
+    width: 40px;
+    height: 40px;
+    font-size: 1.6rem;
+  }
+
+  .viewer-prev {
+    left: 8px;
+  }
+
+  .viewer-next {
+    right: 8px;
+  }
+}
+
+@keyframes viewer-in {
+  from {
+    opacity: 0;
   }
 }
