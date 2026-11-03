@@ -53,8 +53,9 @@ function renderDetails(item, category) {
     h(
       "div",
       { class: "meta" },
-      h("span", { class: isPodium(item) ? "rank rank-podium" : "rank" }, `#${item.rank}`),
+      h("span", { class: isPodium(item.globalRank) ? "rank rank-podium" : "rank" }, `#${item.globalRank}`),
       h("span", { class: "tag" }, item.category),
+      h("span", { class: "meta-sub" }, `#${item.rank} de la catégorie`),
     ),
     h("h1", { class: "item-name" }, item.name),
     h("p", { class: "price" }, formatPrice(item.price)),

@@ -1,6 +1,33 @@
 {
   "title": "Ma wishlist",
   "intro": "Dans chaque catégorie, c’est par ordre de préférence, mais n’importe quoi me fait super plaisir (si quelque chose ne me plaisait pas, elle ne serait juste PAS sur la liste) donc faites le choix vous-même.\nEn plus il y a pour tout budget (pour chaque catégorie)",
+  "ranking": [
+    "argent",
+    "sauteuse-inox",
+    "poele-acier",
+    "couteau-japonais",
+    "chateaux-de-bourgogne",
+    "dawn-of-pangaea",
+    "pantalon-marron",
+    "pull",
+    "rice-cooker",
+    "planche-a-decouper",
+    "pierre-a-pizza",
+    "jaipur",
+    "lost-cities-duel",
+    "carnuta",
+    "sea-salt-paper",
+    "histoire-mythologie-grecque",
+    "histoire-mythologie-nordique",
+    "histoire-cuisine",
+    "pelle-a-pizza",
+    "culs-de-poule",
+    "dobble",
+    "chaussettes-blanches",
+    "t-shirt",
+    "histoire-animaux",
+    "fliptoons"
+  ],
   "categories": [
     {
       "name": "Autre",
@@ -142,13 +169,6 @@
       "note": "C’est plus simple de donner de l’argent et je vous enverrai ce que j’ai pris, sinon demandez à Juliette",
       "items": [
         {
-          "id": "chaussettes-blanches",
-          "name": "Chaussettes montantes blanches",
-          "price": 3.9,
-          "link": "https://www.uniqlo.com/fr/fr/",
-          "note": "Chaussettes montantes blanches Uniqlo (43/46)"
-        },
-        {
           "id": "pantalon-marron",
           "name": "Pantalon marron foncé",
           "price": 50,
@@ -159,6 +179,13 @@
           "name": "Pull",
           "price": 80,
           "note": "Un pull (je dois choisir le modèle)"
+        },
+        {
+          "id": "chaussettes-blanches",
+          "name": "Chaussettes montantes blanches",
+          "price": 3.9,
+          "link": "https://www.uniqlo.com/fr/fr/",
+          "note": "Chaussettes montantes blanches Uniqlo (43/46)"
         },
         {
           "id": "t-shirt",
