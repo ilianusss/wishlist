@@ -10,15 +10,14 @@
     "chateaux-de-bourgogne",
     "dawn-of-pangaea",
     "pantalon-marron",
-    "pull",
-    "rice-cooker",
     "planche-a-decouper",
+    "rice-cooker",
+    "pull",
     "pierre-a-pizza",
     "jaipur",
     "lost-cities-duel",
     "carnuta",
     "sea-salt-paper",
-    "histoire-mythologie-grecque",
     "histoire-mythologie-nordique",
     "histoire-cuisine",
     "pelle-a-pizza",
@@ -75,17 +74,17 @@
           "link": "https://couteauxduchef.com/products/couteau-legumes-kai-lame-9cm-etui-protecteur-cerisier-p6405?_pos=1&_sid=4b803ed68&_ss=r&_fid=df1aa3a3e"
         },
         {
-          "id": "rice-cooker",
-          "name": "Rice cooker",
-          "price": 50,
-          "link": "https://www.amazon.fr/dp/B00V8ZQKGO?m=A1X6FK5RDHNB96&tag=idealocom-21"
-        },
-        {
           "id": "planche-a-decouper",
           "name": "Planche à découper",
           "price": 65,
           "link": "https://www.zwilling.com/fr/zwilling-accessoires-60-cm-x-40-cm-planche-a-decouper-nature-35118-100-0/35118-100-0.html?cgid=cutlery_cutting-boards",
           "note": "Une planche à découper en bois de hêtre, chêne ou noyer. Épaisseur 3 à 4 cm. Si possible 60x40 ou dans ces eaux-là. Je mets un exemple mais une planche avec ces caractéristiques est très bien."
+        },
+        {
+          "id": "rice-cooker",
+          "name": "Rice cooker",
+          "price": 50,
+          "link": "https://www.amazon.fr/dp/B00V8ZQKGO?m=A1X6FK5RDHNB96&tag=idealocom-21"
         },
         {
           "id": "pierre-a-pizza",
@@ -207,12 +206,6 @@
     {
       "name": "Lecture",
       "items": [
-        {
-          "id": "histoire-mythologie-grecque",
-          "name": "L’ incroyable histoire de la mythologie grecque",
-          "price": 26,
-          "link": "https://www.fnac.com/a17441589/Philippe-Bercovici-L-Incroyable-histoire-de-la-mythologie-grecque"
-        },
         {
           "id": "histoire-mythologie-nordique",
           "name": "L’ incroyable histoire de la mythologie nordique",
