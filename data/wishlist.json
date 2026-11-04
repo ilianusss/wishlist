@@ -3,7 +3,6 @@
   "intro": "Dans chaque catégorie, c’est par ordre de préférence, mais n’importe quoi me fait super plaisir (si quelque chose ne me plaisait pas, ce ne serait juste PAS sur la liste) donc faites le choix vous-même.\nEn plus il y a pour tout budget (pour chaque catégorie)",
   "ranking": [
     "argent",
-    "sauteuse-inox",
     "poele-acier",
     "couteau-japonais",
     "couteau-office-japonais",
@@ -46,14 +45,6 @@
     {
       "name": "Cuisine",
       "items": [
-        {
-          "id": "sauteuse-inox",
-          "name": "Sauteuse en inox",
-          "price": 139,
-          "link": "https://atmakitchenware.fr/products/la-sauteuse-ideale-en-inox-manche-bronze-26-cm",
-          "note": "Sauteuse en inox 26 cm ATMA (manche bronze si possible)",
-          "warning": "ATTENTION A COMMANDER AVANT LE 9 NOVEMBRE"
-        },
         {
           "id": "poele-acier",
           "name": "Poele en acier",
