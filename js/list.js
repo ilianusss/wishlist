@@ -1,5 +1,15 @@
 import { h, richText, showError, showMessage } from "./dom.js";
-import { formatPrice, isPodium, itemUrl, loadWishlist, priceValue } from "./wishlist.js";
+import {
+  WISHLISTS,
+  formatPrice,
+  isPodium,
+  itemUrl,
+  listUrl,
+  loadWishlist,
+  priceValue,
+  wishlistFromUrl,
+  withWishlist,
+} from "./wishlist.js";
 
 const ALL_CATEGORIES = "all";
 const DEFAULT_SORT = "rank";
@@ -10,6 +20,8 @@ const SORT_ORDERS = {
   price: (isAll) => (a, b) => Math.sign(priceValue(a) - priceValue(b)) || rankOf(a, isAll) - rankOf(b, isAll),
 };
 
+const wishlist = wishlistFromUrl();
+const switcher = document.getElementById("wishlists");
 const titleElement = document.getElementById("title");
 const intro = document.getElementById("intro");
 const chipGroup = document.getElementById("categories");
@@ -20,13 +32,23 @@ const table = document.getElementById("table");
 const rows = document.getElementById("rows");
 const status = document.getElementById("status");
 
+renderSwitcher();
+
 try {
-  start(await loadWishlist());
+  start(await loadWishlist(wishlist));
 } catch (error) {
   showError(status, error);
 }
 
-function start({ title, intro: introText, categories }) {
+function renderSwitcher() {
+  switcher.replaceChildren(
+    ...WISHLISTS.map(({ id, label }) =>
+      h("a", { href: listUrl(id), "aria-current": id === wishlist ? "page" : null }, label),
+    ),
+  );
+}
+
+function start({ title, intro: introText, categorized, categories }) {
   document.title = title;
   titleElement.textContent = title;
   if (introText !== null) {
@@ -37,7 +59,7 @@ function start({ title, intro: introText, categories }) {
   const allItems = categories.flatMap((category) => category.items);
   const params = new URLSearchParams(location.search);
   const state = {
-    category: categories.some(({ name }) => name === params.get("category")) ? params.get("category") : ALL_CATEGORIES,
+    category: categorized && categories.some(({ name }) => name === params.get("category")) ? params.get("category") : ALL_CATEGORIES,
     sort: Object.hasOwn(SORT_ORDERS, params.get("sort") ?? "") ? params.get("sort") : DEFAULT_SORT,
   };
 
@@ -55,6 +77,8 @@ function start({ title, intro: introText, categories }) {
     ),
   );
   chipGroup.replaceChildren(...chips);
+  chipGroup.hidden = !categorized;
+  table.classList.toggle("is-flat", !categorized);
   for (const button of sortButtons) button.addEventListener("click", () => update({ sort: button.dataset.sort }));
 
   const render = () => {
@@ -82,7 +106,7 @@ function start({ title, intro: introText, categories }) {
 
 function renderRow(item, index, isAll) {
   const rank = rankOf(item, isAll);
-  const link = h("a", { href: itemUrl(item), class: "row-link" }, item.name);
+  const link = h("a", { href: itemUrl(item, wishlist), class: "row-link" }, item.name);
   return h(
     "tr",
     {
@@ -106,7 +130,7 @@ function renderRow(item, index, isAll) {
 }
 
 function saveStateInUrl(state, isAll) {
-  const params = new URLSearchParams();
+  const params = withWishlist(new URLSearchParams(), wishlist);
   if (!isAll) params.set("category", state.category);
   if (state.sort !== DEFAULT_SORT) params.set("sort", state.sort);
   const query = params.toString();

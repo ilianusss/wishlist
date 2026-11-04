@@ -1,14 +1,16 @@
 import { h, richText, showError, showMessage } from "./dom.js";
-import { formatPrice, isPodium, loadWishlist } from "./wishlist.js";
+import { formatPrice, isPodium, listUrl, loadWishlist, wishlistFromUrl } from "./wishlist.js";
 
 const back = document.getElementById("back");
 const article = document.getElementById("item");
 const status = document.getElementById("status");
+const wishlist = wishlistFromUrl();
 
+back.href = listUrl(wishlist);
 restoreListState();
 
 try {
-  const { title, categories } = await loadWishlist();
+  const { title, categories } = await loadWishlist(wishlist);
   const id = new URLSearchParams(location.search).get("id");
   const category = categories.find(({ items }) => items.some((candidate) => candidate.id === id));
   if (category) renderItem(category.items.find((candidate) => candidate.id === id), category, title);
@@ -54,8 +56,10 @@ function renderDetails(item, category) {
       "div",
       { class: "meta" },
       h("span", { class: isPodium(item.globalRank) ? "rank rank-podium" : "rank" }, `#${item.globalRank}`),
-      h("span", { class: "tag" }, item.category),
-      h("span", { class: "meta-sub" }, `#${item.rank} de la catégorie`),
+      item.category !== null && [
+        h("span", { class: "tag" }, item.category),
+        h("span", { class: "meta-sub" }, `#${item.rank} de la catégorie`),
+      ],
     ),
     h("h1", { class: "item-name" }, item.name),
     h("p", { class: "price" }, formatPrice(item.price)),

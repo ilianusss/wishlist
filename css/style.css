@@ -109,7 +109,15 @@ body {
   animation: rise 500ms var(--ease) both;
 }
 
+.page-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
 .page-header h1 {
+  min-width: 0;
   margin: 0;
   font-size: clamp(1.75rem, 4vw, 2.5rem);
   line-height: 1.15;
@@ -190,12 +198,14 @@ body {
   border-radius: 999px;
 }
 
-.segmented button {
+.segmented button,
+.segmented a {
   appearance: none;
   border: 0;
   background: transparent;
   color: var(--muted);
   font: inherit;
+  text-decoration: none;
   padding: 5px 12px;
   border-radius: 999px;
   cursor: pointer;
@@ -204,11 +214,13 @@ body {
     color 180ms var(--ease);
 }
 
-.segmented button:hover {
+.segmented button:hover,
+.segmented a:hover {
   color: var(--text);
 }
 
-.segmented button[aria-pressed="true"] {
+.segmented button[aria-pressed="true"],
+.segmented a[aria-current="page"] {
   background: var(--accent-soft);
   color: var(--accent);
   font-weight: 600;
@@ -295,8 +307,16 @@ body {
   width: 72px;
 }
 
+.switcher {
+  flex: none;
+  margin-top: 4px;
+  font-size: 0.875rem;
+}
+
 .table.is-all .col-global,
-.table:not(.is-all) .col-category {
+.table:not(.is-all) .col-category,
+.table.is-flat .col-category,
+.table.is-flat .cell-sub {
   display: none;
 }
 

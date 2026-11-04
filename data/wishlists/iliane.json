@@ -24,7 +24,6 @@
     "dobble",
     "chaussettes-blanches",
     "t-shirt",
-    "histoire-animaux",
     "fliptoons"
   ],
   "categories": [
@@ -208,12 +207,6 @@
           "name": "L’ incroyable histoire de la cuisine",
           "price": 26,
           "link": "https://www.fnac.com/a16092523/Benoist-Simmat-L-Incroyable-histoire-de-la-cuisine-De-la-prehistoire-a-nos-jours-500-000-ans-d-aventure"
-        },
-        {
-          "id": "histoire-animaux",
-          "name": "L’ incroyable histoire des animaux",
-          "price": 22,
-          "link": "https://www.fnac.com/a13934048/Karine-Lou-Matignon-L-Incroyable-histoire-des-animaux"
         }
       ]
     }

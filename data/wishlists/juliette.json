@@ -1,0 +1,43 @@
+{
+  "title": "Wishlist de Juliette",
+  "items": [
+    {
+      "id": "les-demons",
+      "name": "Les Démons, Dostoïevski",
+      "price": 24.5,
+      "link": "https://www.fnac.com/a22419295/Fiodor-Mikhailovitch-Dostoievski-Les-Demon",
+      "note": "L’édition Actes Sud traduite par André Markowicz, **celle avec la couverture à fleurs**."
+    },
+    {
+      "id": "blush-merit",
+      "name": "Blush Merit",
+      "price": 13.99,
+      "link": "https://www.sephora.fr/p/blush-creme-multi-usage---bonne-mine-naturelle-soin-anti-teint-terne-555480.html",
+      "note": "Teinte **Dramatic Plum**."
+    },
+    {
+      "id": "histoire-animaux",
+      "name": "L’ incroyable histoire des animaux",
+      "price": 22,
+      "link": "https://www.fnac.com/a13934048/Karine-Lou-Matignon-L-Incroyable-histoire-des-animaux"
+    },
+    {
+      "id": "jeu-de-tarot",
+      "name": "Jeu de tarot",
+      "price": 9.9,
+      "link": "https://www.play-in.com/fr/produit/426933/jeu-de-78-cartes-tarot-standard-piatnik"
+    },
+    {
+      "id": "pailles-en-verre",
+      "name": "Pailles en verre colorées ou décorées",
+      "price": 5,
+      "link": "https://flyingtiger.com/fr-fr/products/glass-straws-with-fish-and-seashell-decorations-4-pcs-3073494",
+      "note": "Demander à Iliane de vérifier si elle ne les a pas déjà."
+    },
+    {
+      "id": "voir-avec-iliane",
+      "name": "Voir avec Iliane",
+      "price": 0
+    }
+  ]
+}

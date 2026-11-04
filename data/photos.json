@@ -1,4 +1,8 @@
 {
+  "blush-merit": [
+    "1.jpg",
+    "2.jpg"
+  ],
   "carnuta": [
     "1.jpg",
     "2.jpg"
@@ -56,9 +60,23 @@
     "1.jpg",
     "2.jpg"
   ],
+  "jeu-de-tarot": [
+    "1.jpg"
+  ],
+  "les-demons": [
+    "1.jpg",
+    "2.jpg"
+  ],
   "lost-cities-duel": [
     "1.jpg",
     "2.jpg"
+  ],
+  "pailles-en-verre": [
+    "1.jpg",
+    "2.jpg",
+    "3.jpg",
+    "4.jpg",
+    "5.jpg"
   ],
   "pantalon-marron": [
     "1.jpg",

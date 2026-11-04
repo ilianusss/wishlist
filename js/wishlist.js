@@ -1,4 +1,8 @@
-const WISHLIST_PATH = "data/wishlist.json";
+export const WISHLISTS = [
+  { id: "iliane", label: "Iliane" },
+  { id: "juliette", label: "Juliette" },
+];
+const DEFAULT_WISHLIST = WISHLISTS[0].id;
 const PHOTOS_PATH = "data/photos.json";
 const PHOTOS_DIR = "assets/items";
 const DEFAULT_TITLE = "Wishlist";
@@ -6,15 +10,35 @@ const PODIUM_SIZE = 3;
 const ID_PATTERN = /^[a-z0-9]+(-[a-z0-9]+)*$/;
 const priceFormat = new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR" });
 
-export async function loadWishlist() {
-  const [wishlistResponse, photosResponse] = await Promise.all([request(WISHLIST_PATH), request(PHOTOS_PATH)]);
-  const wishlist = await readJson(wishlistResponse, WISHLIST_PATH);
+export function wishlistFromUrl() {
+  const id = new URLSearchParams(location.search).get("list");
+  return WISHLISTS.some((wishlist) => wishlist.id === id) ? id : DEFAULT_WISHLIST;
+}
+
+// The default wishlist keeps the bare URLs that were shared before there were several lists.
+export function withWishlist(params, wishlist) {
+  if (wishlist !== DEFAULT_WISHLIST) params.set("list", wishlist);
+  return params;
+}
+
+export async function loadWishlist(id) {
+  const path = `data/wishlists/${id}.json`;
+  const [wishlistResponse, photosResponse] = await Promise.all([request(path), request(PHOTOS_PATH)]);
+  const wishlist = await readJson(wishlistResponse, path);
   const photos = photosResponse.status === 404 ? {} : await readJson(photosResponse, PHOTOS_PATH);
-  return {
-    title: isText(wishlist.title) ? wishlist.title : DEFAULT_TITLE,
-    intro: optionalText(wishlist.intro, (reason) => fail(`"intro" ${reason}`)),
-    categories: parseCategories(wishlist.categories, photos, wishlist.ranking),
-  };
+  try {
+    const categorized = wishlist.categories !== undefined;
+    return {
+      title: isText(wishlist.title) ? wishlist.title : DEFAULT_TITLE,
+      intro: optionalText(wishlist.intro, (reason) => fail(`"intro" ${reason}`)),
+      categorized,
+      categories: categorized
+        ? parseCategories(wishlist.categories, photos, wishlist.ranking)
+        : [parseUncategorized(wishlist.items, photos)],
+    };
+  } catch (error) {
+    throw new Error(`${path}, ${error.message}`);
+  }
 }
 
 export function formatPrice(price) {
@@ -26,8 +50,13 @@ export function priceValue(item) {
   return typeof item.price === "number" ? item.price : Infinity;
 }
 
-export function itemUrl(item) {
-  return `item.html?id=${encodeURIComponent(item.id)}`;
+export function listUrl(wishlist) {
+  const query = withWishlist(new URLSearchParams(), wishlist).toString();
+  return query ? `index.html?${query}` : "index.html";
+}
+
+export function itemUrl(item, wishlist) {
+  return `item.html?${withWishlist(new URLSearchParams({ id: item.id }), wishlist)}`;
 }
 
 export function isPodium(rank) {
@@ -76,6 +105,16 @@ function parseCategories(rawCategories, photos, rawRanking) {
   return categories;
 }
 
+// A wishlist without categories is a plain "items" list, already in order of preference.
+function parseUncategorized(rawItems, photos) {
+  if (!Array.isArray(rawItems)) fail(`"categories" ou "items" doit être une liste.`);
+
+  const ids = new Set();
+  const items = rawItems.map((item, index) => parseItem(item, { category: null, rank: index + 1, ids, photos }));
+  for (const item of items) item.globalRank = item.rank;
+  return { name: null, note: null, items };
+}
+
 // "ranking" lists every item id from best to worst; it must cover all items exactly once.
 function applyGlobalRanking(categories, rawRanking, ids) {
   if (!Array.isArray(rawRanking)) fail(`"ranking" doit être une liste d'id, du préféré au moins préféré.`);
@@ -94,7 +133,7 @@ function applyGlobalRanking(categories, rawRanking, ids) {
 }
 
 function parseItem(raw, { category, rank, ids, photos }) {
-  const failItem = (reason) => fail(`${category}, cadeau n°${rank} : ${reason}`);
+  const failItem = (reason) => fail(`${category === null ? "" : `${category}, `}cadeau n°${rank} : ${reason}`);
 
   for (const field of ["id", "name"]) {
     if (!isText(raw[field])) failItem(`le champ "${field}" est obligatoire.`);
@@ -136,5 +175,5 @@ function isWebUrl(value) {
 }
 
 function fail(reason) {
-  throw new Error(`${WISHLIST_PATH}, ${reason}`);
+  throw new Error(reason);
 }
